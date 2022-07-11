@@ -25,19 +25,23 @@ namespace BuscaECondominio.Lib.Models
             Nome = nome;
         }
         public void SetCpf(string cpf)
-        {            
+        {    
+            ValidarCpf(cpf);
             Cpf = cpf;
         }
         public void SetDataNascimento(DateTime dataNascimento)
-        {           
+        {
+            ValidarDataNascimento(dataNascimento);
             DataNascimento = dataNascimento;
         }
         public void SetEmail(string email)
-        {            
+        {
+            ValidarEmail(email);
             Email = email;
         }
         public void SetSenha(string senha)
         {
+            ValidarSenha(senha);
             Senha = senha;
         }
         public void SetUrlImagemCadastro(string urlImagem)
@@ -47,6 +51,26 @@ namespace BuscaECondominio.Lib.Models
         public void SetDataCadastro(DateTime dataCadastro)
         {
             DataCadastro = dataCadastro;
+        }
+        public bool ValidarDataNascimento(DateTime dataNascimento)
+        {
+            if (dataNascimento < DateTime.Parse("01/01/2010"));
+            return true;
+        }        
+        public bool ValidarEmail(string email)
+        {
+            if (email.Contains("@"));
+            return true;
+        }
+        public bool ValidarCpf(string cpf)
+        {
+            if (cpf.Length == 11);
+            return true;
+        }
+        public bool ValidarSenha(string senha)
+        {
+            if (senha.Count() < 9);
+            return true;
         }
     }
 }
