@@ -9,7 +9,7 @@ namespace BuscaECondominio.Lib.Models
         public string Senha { get; private set; }
         public string UrlImagemCadastro { get; private set; }
         public DateTime DataCadastro { get; private set; }
-
+              
         public Usuario(int id, string nome, string cpf, DateTime dataNascimento, string email, string senha, DateTime dataCadastro) : base(id)
         {
             SetNome(nome);
@@ -18,8 +18,7 @@ namespace BuscaECondominio.Lib.Models
             SetEmail(email);
             SetSenha(senha);
             DataCadastro = dataCadastro;
-        }
-        
+        }       
         public void SetNome(string nome)
         {
             Nome = nome;
