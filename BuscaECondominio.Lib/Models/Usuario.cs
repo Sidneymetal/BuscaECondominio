@@ -2,14 +2,14 @@ namespace BuscaECondominio.Lib.Models
 {
     public class Usuario : ModelBase
     {
-        public string Nome { get; private set; }
-        public string Cpf { get; private set; }
-        public DateTime DataNascimento { get; private set; }
-        public string Email { get; private set; }
-        public string Senha { get; private set; }
-        public string UrlImagemCadastro { get; private set; }
-        public DateTime DataCadastro { get; private set; }
-              
+        public string Nome { get; set; }
+        public string Cpf { get; set; }
+        public DateTime DataNascimento { get; set; }
+        public string Email { get; set; }
+        public string Senha { get; set; }
+        public string UrlImagemCadastro { get; set; }
+        public DateTime DataCadastro { get; set; }
+        
         public Usuario(int id, string nome, string cpf, DateTime dataNascimento, string email, string senha, DateTime dataCadastro) : base(id)
         {
             SetNome(nome);
@@ -18,13 +18,13 @@ namespace BuscaECondominio.Lib.Models
             SetEmail(email);
             SetSenha(senha);
             DataCadastro = dataCadastro;
-        }       
+        }
         public void SetNome(string nome)
         {
             Nome = nome;
         }
         public void SetCpf(string cpf)
-        {    
+        {
             ValidarCpf(cpf);
             Cpf = cpf;
         }
@@ -53,23 +53,23 @@ namespace BuscaECondominio.Lib.Models
         }
         public bool ValidarDataNascimento(DateTime dataNascimento)
         {
-            if (dataNascimento < DateTime.Parse("01/01/2010"));
+            if (dataNascimento < DateTime.Parse("01/01/2010")) ;
             return true;
-        }        
+        }
         public bool ValidarEmail(string email)
         {
-            if (email.Contains("@"));
+            if (email.Contains("@")) ;
             return true;
         }
         public bool ValidarCpf(string cpf)
         {
-            if (cpf.Length == 11);
+            if ((cpf.Count() <= 11) & cpf.All(char.IsNumber))
             return true;
         }
         public bool ValidarSenha(string senha)
         {
-            if (senha.Count() < 9);
-            return true;
+            if (senha.Count() > 8) ;
+            return true
         }
     }
 }

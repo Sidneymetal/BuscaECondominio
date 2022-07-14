@@ -1,3 +1,7 @@
+using BuscaECondominio.Lib.Models;
+using Microsoft.AspNetCore.Mvc;
+using BuscaECondominio.Web.Controllers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
