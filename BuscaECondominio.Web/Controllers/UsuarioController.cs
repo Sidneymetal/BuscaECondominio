@@ -1,28 +1,45 @@
-﻿using BuscaECondominio.Lib.Models;
+﻿using BuscaECondominio.Lib.Interfaces;
+using BuscaECondominio.Lib.Models;
+using BuscaECondominio.Web.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuscaECondominio.Web.Controllers 
 {
     [ApiController]
     [Route("[controller]")]
-    public class UsuarioController : ControllerBase
+    public class  UsuarioController : ControllerBase
     {
-        public Usuario UsuarioMain { get; set; }
-        [HttpGet]
-        public IActionResult GetUsuario() 
-        {
-            var usuario = new Usuario(1, "Sidney", "12345678901", DateTime.Parse("22/04/2089"), "mamamia@gmail.blabla", "123456", DateTime.Parse("21/04/2022"));
-            return Ok(usuario);
-        } 
-        [HttpPost]
-        public IActionResult SetUsuario(Usuario usuario) 
-        {
-            UsuarioMain = usuario;
-            return Ok(UsuarioMain);
-        } 
-        [HttpUpdate]
+       protected readonly ILogger<UsuarioController> _logger;
+        protected readonly IUsuarioRepositorio _repositorio;
 
-        //int id, string nome, string cpf, DateTime dataNascimento, string email, string senha, DateTime dataCadastro
-
+        public UsuarioController(ILogger<UsuarioController> logger, IUsuarioRepositorio repositorio)
+        {
+            _logger = logger;
+            _repositorio = repositorio;
+        }
+        [HttpGet()]
+        public IActionResult ListarUsuarios()
+        {
+            return Ok(_repositorio);
+        }        
+        [HttpPost()]
+        public IActionResult AdicionarUsuario(UsuarioDTO usuarioDTO)
+        {
+            var usuario = new Usuario(usuarioDTO.Id, usuarioDTO.Nome, usuarioDTO.Cpf, usuarioDTO.DataNascimento, usuarioDTO.Email, usuarioDTO.Senha, usuarioDTO.DataCadastro);
+            _repositorio.AdicionarUsuario(usuario);
+            return Ok("Usuario adicionado.");
+        }
+        [HttpPut()]
+        public IActionResult AlterarUsuario(int id)
+        {
+            _repositorio.AlterarUsuario(id);
+            return Ok("Usuario alterado.");
+        }
+        [HttpDelete()]
+        public IActionResult DeletarUsuario(int id)
+        {
+            _repositorio.DeletarUsuario(id);
+            return Ok("Usuario removido.");
+        }    
     }
 }

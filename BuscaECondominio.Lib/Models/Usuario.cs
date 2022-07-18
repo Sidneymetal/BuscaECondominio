@@ -1,3 +1,4 @@
+
 namespace BuscaECondominio.Lib.Models
 {
     public class Usuario : ModelBase
@@ -10,8 +11,11 @@ namespace BuscaECondominio.Lib.Models
         public string UrlImagemCadastro { get; set; }
         public DateTime DataCadastro { get; set; }
         
+        public List<Usuario> ListaUsuario { get; set; } = new List<Usuario>();
+
         public Usuario(int id, string nome, string cpf, DateTime dataNascimento, string email, string senha, DateTime dataCadastro) : base(id)
         {
+            SetId(id);
             SetNome(nome);
             SetCpf(cpf);
             SetDataNascimento(dataNascimento);
@@ -25,7 +29,7 @@ namespace BuscaECondominio.Lib.Models
         }
         public void SetCpf(string cpf)
         {
-            ValidarCpf(cpf);
+            ValidarCpF(cpf);
             Cpf = cpf;
         }
         public void SetDataNascimento(DateTime dataNascimento)
@@ -58,18 +62,18 @@ namespace BuscaECondominio.Lib.Models
         }
         public bool ValidarEmail(string email)
         {
-            if (email.Contains("@")) ;
+            if (email.Contains("@"));
             return true;
         }
-        public bool ValidarCpf(string cpf)
+        public bool ValidarCpF(string cpf)
         {
-            if ((cpf.Count() <= 11) & cpf.All(char.IsNumber))
+            if ((cpf.Count() <= 11) & cpf.All(char.IsNumber));
             return true;
         }
         public bool ValidarSenha(string senha)
         {
-            if (senha.Count() > 8) ;
-            return true
+            if (senha.Count() > 8);
+            return true;
         }
     }
 }
