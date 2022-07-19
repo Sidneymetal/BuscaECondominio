@@ -12,6 +12,8 @@ namespace BuscaECondominio.Web.Controllers
        protected readonly ILogger<UsuarioController> _logger;
         protected readonly IUsuarioRepositorio _repositorio;
 
+        public static List<Usuario> ListaUsuarios { get; set; } = new List<Usuario>();
+
         public UsuarioController(ILogger<UsuarioController> logger, IUsuarioRepositorio repositorio)
         {
             _logger = logger;
