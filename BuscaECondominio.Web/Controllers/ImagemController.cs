@@ -10,6 +10,7 @@ namespace BuscaECondominio.Web.Controllers
     [Route("[controller]")]
     public class ImagemController : ControllerBase    
     {
+        private readonly List<string> _extensoesImage = new List<string>(){"image/jpeg", "image/png"};
         private readonly IAmazonS3 _amazonS3;
         public ImagemController(IAmazonS3 amazonS3)
         {
@@ -20,7 +21,16 @@ namespace BuscaECondominio.Web.Controllers
         {
             var resposta = await _amazonS3.ListBucketsAsync();
             return Ok(resposta.Buckets.Select(x => x.BucketName));
-        }   
+        }  
+
+        [HttpPost]
+        public async Task<IActionResult> CreateImage(IFormFile image)
+        {
+            
+            if (!_extensoesImage.Contains(image.ContentType))
+                return BadRequest("Tipo Inválido");            
+            return Ok();            
+        } 
 
         [HttpPost("bucket")]
         public async Task<IActionResult> CriarBucket(string nomeBucket)
