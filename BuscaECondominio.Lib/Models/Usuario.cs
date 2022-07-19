@@ -3,25 +3,25 @@ namespace BuscaECondominio.Lib.Models
 {
     public class Usuario : ModelBase
     {
-        public string Nome { get; set; }
+        public string Email { get; set; }        
         public string Cpf { get; set; }
         public DateTime DataNascimento { get; set; }
-        public string Email { get; set; }
+        public string Nome { get; set; }        
         public string Senha { get; set; }
         public string UrlImagemCadastro { get; set; }
-        public DateTime DataCadastro { get; set; }
+        public DateTime DataCriacao { get; set; }
         
         public List<Usuario> ListaUsuario { get; set; } = new List<Usuario>();
 
-        public Usuario(int id, string nome, string cpf, DateTime dataNascimento, string email, string senha, DateTime dataCadastro) : base(id)
+        public Usuario(int id, string email, string cpf, DateTime dataNascimento, string nome, string senha, DateTime dataCriacao) : base(id)
         {
-            SetId(id);
-            SetNome(nome);
+            SetId(id);  
+            SetEmail(email);          
             SetCpf(cpf);
-            SetDataNascimento(dataNascimento);
-            SetEmail(email);
+            SetDataNascimento(dataNascimento);            
+            SetNome(nome);
             SetSenha(senha);
-            DataCadastro = dataCadastro;
+            DataCriacao = dataCriacao;
         }
         public void SetNome(string nome)
         {
@@ -51,9 +51,9 @@ namespace BuscaECondominio.Lib.Models
         {
             UrlImagemCadastro = urlImagem;
         }
-        public void SetDataCadastro(DateTime dataCadastro)
+        public void SetDataCadastro(DateTime dataCriacao)
         {
-            DataCadastro = dataCadastro;
+            DataCriacao = dataCriacao;
         }
         public bool ValidarDataNascimento(DateTime dataNascimento)
         {

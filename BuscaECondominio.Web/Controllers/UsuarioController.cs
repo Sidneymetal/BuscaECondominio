@@ -27,7 +27,7 @@ namespace BuscaECondominio.Web.Controllers
         [HttpPost()]
         public IActionResult AdicionarUsuario(UsuarioDTO usuarioDTO)
         {
-            var usuario = new Usuario(usuarioDTO.Id, usuarioDTO.Nome, usuarioDTO.Cpf, usuarioDTO.DataNascimento, usuarioDTO.Email, usuarioDTO.Senha, usuarioDTO.DataCadastro);
+            var usuario = new Usuario(usuarioDTO.Id, usuarioDTO.Email, usuarioDTO.Cpf, usuarioDTO.DataNascimento, usuarioDTO.Nome, usuarioDTO.Senha, usuarioDTO.DataCriacao);
             _repositorio.AdicionarUsuario(usuario);
             return Ok("Usuario adicionado.");
         }

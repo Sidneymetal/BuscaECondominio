@@ -14,7 +14,7 @@ namespace BuscaECondominio.Lib.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Usuario>().ToTable("usuario");
+            modelBuilder.Entity<Usuario>().ToTable("usuarios");
             modelBuilder.Entity<Usuario>().HasKey(x => x.Id);
         }
         public DbSet<Usuario> Usuarios { get; set; }
