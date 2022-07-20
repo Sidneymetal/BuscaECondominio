@@ -4,6 +4,7 @@ using BuscaECondominio.Lib.Data.Repositorios;
 using Microsoft.EntityFrameworkCore;
 using Amazon.Runtime;
 using Amazon.S3;
+using Amazon.Rekognition;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +23,9 @@ builder.Services.AddSwaggerGen();
 var awsOptions = builder.Configuration.GetAWSOptions();
 awsOptions.Credentials = new EnvironmentVariablesAWSCredentials();
 builder.Services.AddDefaultAWSOptions(awsOptions);
+
 builder.Services.AddAWSService<IAmazonS3>();
+builder.Services.AddScoped<AmazonRekognitionClient>();
 
 
 var app = builder.Build();
