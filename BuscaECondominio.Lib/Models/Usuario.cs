@@ -3,25 +3,23 @@ namespace BuscaECondominio.Lib.Models
 {
     public class Usuario : ModelBase
     {
-        public string Email { get; set; }        
-        public string Cpf { get; set; }
-        public DateTime DataNascimento { get; set; }
-        public string Nome { get; set; }        
-        public string Senha { get; set; }
-        public string UrlImagemCadastro { get; set; }
-        public DateTime DataCriacao { get; set; }
-        
-        public List<Usuario> ListaUsuario { get; set; } = new List<Usuario>();
+        public string Email { get; private set; }
+        public string Cpf { get; private set; }
+        public DateTime DataNascimento { get; private set; }
+        public string Nome { get; private set; }
+        public string Senha { get; private set; }
+        public string? UrlImagemCadastro { get; private set; }
+        public DateTime DataCriacao { get; private set; }       
 
         public Usuario(int id, string email, string cpf, DateTime dataNascimento, string nome, string senha, DateTime dataCriacao) : base(id)
         {
-            SetId(id);  
-            SetEmail(email);          
+            SetId(id);
+            SetEmail(email);
             SetCpf(cpf);
-            SetDataNascimento(dataNascimento);            
+            SetDataNascimento(dataNascimento);
             SetNome(nome);
             SetSenha(senha);
-            DataCriacao = dataCriacao;
+            SetDataCriacao(dataCriacao);
         }
         public void SetNome(string nome)
         {
@@ -51,29 +49,33 @@ namespace BuscaECondominio.Lib.Models
         {
             UrlImagemCadastro = urlImagem;
         }
-        public void SetDataCadastro(DateTime dataCriacao)
+        public void SetDataCriacao(DateTime dataCriacao)
         {
             DataCriacao = dataCriacao;
         }
         public bool ValidarDataNascimento(DateTime dataNascimento)
         {
-            if (dataNascimento < DateTime.Parse("01/01/2010")) ;
-            return true;
+            if (dataNascimento < DateTime.Parse("01/01/2010"))
+                return true;
+            throw new Exception();
         }
         public bool ValidarEmail(string email)
         {
-            if (email.Contains("@"));
-            return true;
+            if (email.Contains("@"))
+                return true;
+            throw new Exception();
         }
         public bool ValidarCpF(string cpf)
         {
-            if ((cpf.Count() <= 11) & cpf.All(char.IsNumber));
-            return true;
+            if ((cpf.Count() <= 11) & cpf.All(char.IsNumber))
+                return true;
+            throw new Exception();
         }
         public bool ValidarSenha(string senha)
         {
-            if (senha.Count() > 8);
-            return true;
+            if (senha.Count() > 8)
+                return true;
+            throw new Exception();
         }
     }
 }

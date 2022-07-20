@@ -20,9 +20,9 @@ namespace BuscaECondominio.Web.Controllers
             _repositorio = repositorio;
         }
         [HttpGet()]
-        public IActionResult ListarUsuarios()
+        public IActionResult ListarUsuarios(int id)
         {
-            return Ok(_repositorio);
+            return Ok(_repositorio.ListarTodos());
         }        
         [HttpPost()]
         public IActionResult AdicionarUsuario(UsuarioDTO usuarioDTO)

@@ -6,5 +6,9 @@ namespace BuscaECondominio.Lib.Exceptions
         {
 
         }
+        public BECException()
+        {
+
+        }
     }
 }

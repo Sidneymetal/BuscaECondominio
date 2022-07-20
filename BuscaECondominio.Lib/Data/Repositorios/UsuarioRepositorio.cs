@@ -11,7 +11,6 @@ namespace BuscaECondominio.Lib.Data.Repositorios
         {
             _context = context;
         }
-
         public void AlterarUsuario(int id)
         {
             var usuario = _dbset.Find(id);                        
