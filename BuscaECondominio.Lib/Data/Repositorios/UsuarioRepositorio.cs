@@ -11,10 +11,11 @@ namespace BuscaECondominio.Lib.Data.Repositorios
         {
             _context = context;
         }
-        public void AlterarUsuario(int id)
+        public async Task AlterarUsuario(int id)
         {
-            var usuario = _dbset.Find(id);                        
-            _context.SaveChanges();
+            var usuario = await _dbset.FindAsync(id); 
+            usuario.SetId(id);                      
+            await _context.SaveChangesAsync();
         }
     }
 }

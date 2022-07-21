@@ -2,14 +2,17 @@
 using BuscaECondominio.Lib.Models;
 using BuscaECondominio.Web.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using S3Object = Amazon.Rekognition.Model.S3Object;
+using Amazon.Rekognition;
+using Amazon.Rekognition.Model;
 
-namespace BuscaECondominio.Web.Controllers 
+namespace BuscaECondominio.Web.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class  UsuarioController : ControllerBase
+    public class UsuarioController : ControllerBase
     {
-       protected readonly ILogger<UsuarioController> _logger;
+        protected readonly ILogger<UsuarioController> _logger;
         protected readonly IUsuarioRepositorio _repositorio;
 
         public static List<Usuario> ListaUsuarios { get; set; } = new List<Usuario>();
@@ -20,28 +23,28 @@ namespace BuscaECondominio.Web.Controllers
             _repositorio = repositorio;
         }
         [HttpGet()]
-        public IActionResult ListarUsuarios(int id)
+        public async Task<IActionResult> ListarUsuarios()
         {
-            return Ok(_repositorio.ListarTodos());
-        }        
+            return Ok(await _repositorio.ListarTodos());
+        }
         [HttpPost()]
-        public IActionResult AdicionarUsuario(UsuarioDTO usuarioDTO)
+        public async Task <IActionResult> AdicionarUsuario(UsuarioDTO usuarioDTO)
         {
             var usuario = new Usuario(usuarioDTO.Id, usuarioDTO.Email, usuarioDTO.Cpf, usuarioDTO.DataNascimento, usuarioDTO.Nome, usuarioDTO.Senha, usuarioDTO.DataCriacao);
-            _repositorio.AdicionarUsuario(usuario);
+            await _repositorio.AdicionarUsuario(usuario);
             return Ok("Usuario adicionado.");
         }
         [HttpPut()]
-        public IActionResult AlterarUsuario(int id)
+        public async Task <IActionResult> AlterarUsuario(int id)
         {
-            _repositorio.AlterarUsuario(id);
+            await _repositorio.AlterarUsuario(id);
             return Ok("Usuario alterado.");
         }
         [HttpDelete()]
-        public IActionResult DeletarUsuario(int id)
+        public async Task<IActionResult> DeletarUsuario(int id)
         {
-            _repositorio.DeletarUsuario(id);
+            await _repositorio.DeletarUsuario(id);
             return Ok("Usuario removido.");
-        }    
+        }
     }
 }

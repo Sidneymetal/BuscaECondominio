@@ -15,24 +15,24 @@ namespace BuscaECondominio.Lib.Data.Repositorios
             _dbset = dbset;
         }
 
-       public List<T> ListarTodos()
+       public async Task <List<T>> ListarTodos()
         {
-            return _dbset.AsNoTracking().ToList();           
+            return await _dbset.AsNoTracking().ToListAsync();           
         }             
-        public T ListarTodosPorId(int id)
+        public async Task <T> ListarTodosPorId(int id)
         {
-            return _dbset.AsNoTracking().First(x => x.Id == id);
+            return await _dbset.AsNoTracking().FirstAsync(x => x.Id == id);
         }
-        public void AdicionarUsuario(T item)
+        public async Task AdicionarUsuario(T item)
         {
-            _dbset.Add(item);
-            _context.SaveChanges();
+            await _dbset.AddAsync(item);
+            await _context.SaveChangesAsync();
         }
-        public void DeletarUsuario(int id)
+        public async Task DeletarUsuario(int id)
         {
-            var item = _dbset.Find(id);
+            var item = await _dbset.FindAsync(id);
             _dbset.Remove(item);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

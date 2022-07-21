@@ -4,8 +4,9 @@ namespace BuscaECondominio.Lib.Interfaces
 {
     public interface IBaseRepositorio<T> where T : ModelBase
     {
-        List<T> ListarTodos();        
-        void AdicionarUsuario(T item);
-        void DeletarUsuario(int id);
+        public Task<List<T>> ListarTodos(); 
+        public Task <T> ListarTodosPorId(int id);       
+        public Task AdicionarUsuario(T item);
+        public Task DeletarUsuario(int id);
     }
 }
