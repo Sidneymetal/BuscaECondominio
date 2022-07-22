@@ -1,10 +1,5 @@
 using Amazon.Rekognition;
 using Amazon.Rekognition.Model;
-using Amazon.S3;
-using Amazon.S3.Model;
-using BuscaECondominio.Lib.Interfaces;
-using BuscaECondominio.Lib.Models;
-using BuscaECondominio.Web.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using S3Object = Amazon.Rekognition.Model.S3Object;
 
@@ -14,10 +9,10 @@ namespace BuscaECondominio.Web.Controllers
     [Route("[controller]")]
     public class RekognitionController : ControllerBase
     {
-        private readonly AmazonRekognitionClient _rekoginitionClient;
-        public RekognitionController(AmazonRekognitionClient rekognitionClient)
+        private readonly AmazonRekognitionClient _rekognitionClient;
+        public RekognitionController(AmazonRekognitionClient rekogntionClient)
         {
-            _rekoginitionClient = rekognitionClient;
+            _rekognitionClient = rekogntionClient;
         }
         [HttpGet]
         public async Task<IActionResult> AnalisarRosto(string nomeArquivo)
@@ -34,8 +29,8 @@ namespace BuscaECondominio.Web.Controllers
             imagem.S3Object = s3Object;
             entrada.Image = imagem;
 
-            var resposta = await _rekoginitionClient.DetectFacesAsync(entrada);
+            var resposta = await _rekognitionClient.DetectFacesAsync(entrada);
             return Ok(resposta);
-        }
+        }       
     }
 }
