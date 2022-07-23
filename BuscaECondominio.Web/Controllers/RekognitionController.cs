@@ -14,7 +14,7 @@ namespace BuscaECondominio.Web.Controllers
         {
             _rekognitionClient = rekogntionClient;
         }
-        [HttpGet]
+        [HttpGet("rekoknition")]
         public async Task<IActionResult> AnalisarRosto(string nomeArquivo)
         {
             var entrada = new DetectFacesRequest();
@@ -22,12 +22,13 @@ namespace BuscaECondominio.Web.Controllers
 
             var s3Object = new S3Object()
             {
-                Bucket = "imagem-aula", 
+                Bucket = "imagens-aula", 
                 Name = nomeArquivo
             };
 
             imagem.S3Object = s3Object;
             entrada.Image = imagem;
+            entrada.Attributes = new List<string>(){"ALL"};
 
             var resposta = await _rekognitionClient.DetectFacesAsync(entrada);
             return Ok(resposta);

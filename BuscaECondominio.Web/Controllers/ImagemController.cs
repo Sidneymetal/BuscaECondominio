@@ -11,7 +11,7 @@ namespace BuscaECondominio.Web.Controllers
     [Route("[controller]")]
     public class ImagemController : ControllerBase
     {
-        private readonly List<string> _imageFormats = new List<string>() { "image/jpeg", "image/png" };
+        private readonly List<string> _imageFormats = new List<string>() { "image/jpeg", "image/png"};
         private readonly IAmazonS3 _amazonS3;
         public ImagemController(IAmazonS3 amazonS3)
         {
@@ -23,20 +23,20 @@ namespace BuscaECondominio.Web.Controllers
         {
             var resposta = await _amazonS3.ListBucketsAsync();
             return Ok(resposta.Buckets.Select(x => x.BucketName));
-        }
+        }        
 
-        [HttpPost]
+        [HttpPost()]
         public async Task<IActionResult> CriarImagem(IFormFile image)
         {
             if (!_imageFormats.Contains(image.ContentType))
                 return BadRequest("Tipo inválido");
             using (var imageStream = new MemoryStream())
             {
-                image.CopyToAsync(imageStream);
+                await image.CopyToAsync(imageStream);
 
                 var request = new PutObjectRequest();
                 request.Key = "reconhecimento" + image.FileName;
-                request.BucketName = "imagem-aula";
+                request.BucketName = "imagens-aula";
                 request.InputStream = imageStream;
 
                 var response = await _amazonS3.PutObjectAsync(request);
@@ -53,7 +53,7 @@ namespace BuscaECondominio.Web.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeletarImagem(string nameImageInS3)
         {
-            var response = await _amazonS3.DeleteObjectAsync("imagem-aula", nameImageInS3);
+            var response = await _amazonS3.DeleteObjectAsync("imagens-aula", nameImageInS3);
             return Ok(response);
         }
     }
