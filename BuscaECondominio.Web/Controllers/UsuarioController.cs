@@ -100,34 +100,21 @@ namespace BuscaECondominio.Web.Controllers
             return false;
         }
 
-        [HttpPut("AlterarEmail")]
-        public async Task<IActionResult> AlterarEmail(int id, string alterarEmail)
-        {
-            await _repositorio.AlterarEmail(id, alterarEmail);
-
-            return Ok("Email alterado.");
-        }
         [HttpPut("AlterarSenha")]
         public async Task<IActionResult> AlterarSenha(int id, string alterarSenha)
         {
             await _repositorio.AlterarSenha(id, alterarSenha);
             return Ok("Senha alterado.");
         }
-        [HttpPut("AlterarNome")]
-        public async Task<IActionResult> AlterarNome(int id, string alterarNome)
-        {
-            await _repositorio.AlterarNome(id, alterarNome);
-            return Ok("Nome alterado.");
-        }
 
-        [HttpPut("LoginEmail/Senha")]
+        [HttpGet("LoginEmail/Senha")]
         public async Task<IActionResult> LoginPorEmailESenha(string email, string senha)
         {
             var emailUsuario = await _repositorio.LoginBuscarPorEmail(email);
             var validarSenhaUsuario = await ConferirSenhaDoUsuario(emailUsuario, senha);
             if (validarSenhaUsuario)
             {
-                return Ok(emailUsuario.Id);
+                return Ok();
             }
             return BadRequest("A senha do usuário está incorreta.");
         }
@@ -138,7 +125,52 @@ namespace BuscaECondominio.Web.Controllers
                 return true;
             }
             return false;
-        }        
+        }
+
+        [HttpPost("Login/Imagem")]
+        public async Task<IActionResult> LoginImagem(int id, IFormFile image)
+        {
+            var buscarUsuarioId = await _repositorio.ListarUsuarioPorId(id);//Buscar usuário no bando por Id.
+            var buscarUsuarioImagem = await BuscarUsuarioPorImagem(buscarUsuarioId.UrlImagemCadastro, image);
+            if(buscarUsuarioImagem)
+            {
+                return Ok();
+            }
+            return BadRequest ("A imagem do usuário não corresponde com o cadastro.");
+        }
+        private async Task<bool> BuscarUsuarioPorImagem(string urlImagemCadastro, IFormFile image)
+        {
+            using (var memoriaStream = new MemoryStream()) // Buscar imagem no banco de dados
+            {
+                var request = new CompareFacesRequest();
+
+                var requestSource = new Image()
+                {
+                    S3Object = new S3Object()
+                    {
+                        Bucket = "imagens-aula",
+                        Name = urlImagemCadastro
+                    }
+                };
+                await image.CopyToAsync(memoriaStream);
+
+                var requestTarget = new Image()
+                {
+                    Bytes = memoriaStream
+                };
+
+                request.SourceImage = requestSource;
+                request.TargetImage = requestTarget;
+                
+                var response = await _rekognitionClient.CompareFacesAsync(request);
+                if (response.FaceMatches.Count == 1 && response.FaceMatches.First().Similarity >= 90)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
         [HttpDelete("DeletarUsuario")]
         public async Task<IActionResult> DeletarUsuario(int id)
         {
@@ -147,7 +179,4 @@ namespace BuscaECondominio.Web.Controllers
         }
     }
 }
-
-
-
 
