@@ -11,10 +11,9 @@ namespace BuscaECondominio.Lib.Data.Repositorios
         {
             _context = context;
         }
-        public async Task AlterarUsuario(int id)
+        public async Task AlterarEmail(int id, string emailCadastrar)
         {
-            var usuario = await _dbset.FindAsync(id); 
-            usuario.SetId(id);                      
+           _dbset.Find(id).SetEmail(emailCadastrar);
             await _context.SaveChangesAsync();
         }
     }

@@ -30,12 +30,12 @@ namespace BuscaECondominio.Web.Controllers
             _amazonS3 = amazonS3;
             _rekognitionClient = rekognitionClient;
         }
-        [HttpGet()]
+        [HttpGet("ListarUsuario")]
         public async Task<IActionResult> ListarUsuarios()
         {
             return Ok(await _repositorio.ListarTodos());
         }
-        [HttpPost("usuario")]
+        [HttpPost("AdicionarUsuario")]
         public async Task<IActionResult> AdicionarUsuario(UsuarioDTO usuarioDTO)
         {
             var usuario = new Usuario(usuarioDTO.Id, usuarioDTO.Email, usuarioDTO.Cpf, usuarioDTO.DataNascimento, usuarioDTO.Nome, usuarioDTO.Senha, usuarioDTO.DataCriacao);
@@ -43,7 +43,7 @@ namespace BuscaECondominio.Web.Controllers
             return Ok("Usuario adicionado.");
         }
 
-        [HttpPost("imagem")]
+        [HttpPost("CadastrarImagem")]
         public async Task<IActionResult> CadastrarImagem(int id, IFormFile imagem)
         {
             var nomeArquivo = await SalvarNoS3(imagem);
@@ -99,14 +99,14 @@ namespace BuscaECondominio.Web.Controllers
             return false;
         }
 
-
-        [HttpPut()]
-        public async Task<IActionResult> AlterarUsuario(int id)
+        [HttpPut("CadastrarEmail")]
+        public async Task<IActionResult> AlterarEmail(int id, string emailCadastrar)
         {
-            await _repositorio.AlterarUsuario(id);
+            await _repositorio.AlterarEmail(id, emailCadastrar);
             return Ok("Usuario alterado.");
-        }
-        [HttpDelete()]
+        }     
+
+        [HttpDelete("DeletarUsuario")]
         public async Task<IActionResult> DeletarUsuario(int id)
         {
             await _repositorio.DeletarUsuario(id);

@@ -4,6 +4,6 @@ namespace BuscaECondominio.Lib.Interfaces
 {   
     public interface IUsuarioRepositorio : IBaseRepositorio<Usuario>
     {
-        public Task AlterarUsuario(int id);
+        public Task AlterarEmail(int id, string emailCadastrar);
     }    
 }
