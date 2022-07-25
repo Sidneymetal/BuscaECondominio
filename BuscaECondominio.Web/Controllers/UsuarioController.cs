@@ -99,12 +99,25 @@ namespace BuscaECondominio.Web.Controllers
             return false;
         }
 
-        [HttpPut("CadastrarEmail")]
-        public async Task<IActionResult> AlterarEmail(int id, string emailCadastrar)
+        [HttpPut("AlterarEmail")]
+        public async Task<IActionResult> AlterarEmail(int id, string alterarEmail)
         {
-            await _repositorio.AlterarEmail(id, emailCadastrar);
-            return Ok("Usuario alterado.");
-        }     
+            await _repositorio.AlterarEmail(id, alterarEmail);
+
+            return Ok("Email alterado.");            
+        }
+        [HttpPut("AlterarSenha")]
+        public async Task<IActionResult> AlterarSenha(int id, string alterarSenha)
+        {
+            await _repositorio.AlterarSenha(id, alterarSenha);
+            return Ok("Senha alterado.");
+        }
+        [HttpPut("AlterarNome")]
+        public async Task<IActionResult> AlterarNome(int id, string alterarNome)
+        {
+            await _repositorio.AlterarNome(id, alterarNome);
+            return Ok("Nome alterado.");
+        }
 
         [HttpDelete("DeletarUsuario")]
         public async Task<IActionResult> DeletarUsuario(int id)
