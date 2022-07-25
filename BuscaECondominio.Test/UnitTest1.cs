@@ -72,7 +72,7 @@ public class UnitTest1
     
     public Usuario CriarUsuarioTest()
     {
-        return new Usuario(0, "Sidney", "1234567899", DateTime.Parse("19/02/1985"), "email@email.com", "bibi123456788", DateTime.Parse("28/07/2020"));
+        return new Usuario(0, "Sidney", "1234567899", DateTime.Parse("19/02/1985"), "email@email.com", "bibi123456788", "marromemos", DateTime.Parse("28/07/2020"));
     }
 }
 

@@ -11,7 +11,7 @@ namespace BuscaECondominio.Lib.Models
         public string? UrlImagemCadastro { get; private set; }
         public DateTime DataCriacao { get; private set; }       
 
-        public Usuario(int id, string email, string cpf, DateTime dataNascimento, string nome, string senha, DateTime dataCriacao) : base(id)
+        public Usuario(int id, string email, string cpf, DateTime dataNascimento, string nome, string senha, string urlImagemCadastro, DateTime dataCriacao) : base(id)
         {
             SetId(id);
             SetEmail(email);
@@ -19,6 +19,7 @@ namespace BuscaECondominio.Lib.Models
             SetDataNascimento(dataNascimento);
             SetNome(nome);
             SetSenha(senha);
+            SetUrlImagemCadastro(urlImagemCadastro);
             SetDataCriacao(dataCriacao);
         }
         public void SetNome(string nome)

@@ -30,8 +30,8 @@ namespace BuscaECondominio.Lib.Data.Repositorios
         }
         public async Task DeletarUsuario(int id)
         {
-            var item = await _dbset.FindAsync(id);
-            _dbset.Remove(item);
+            var usuario = await _dbset.FindAsync(id);
+            _dbset.Remove(usuario);
             await _context.SaveChangesAsync();
         }
     }

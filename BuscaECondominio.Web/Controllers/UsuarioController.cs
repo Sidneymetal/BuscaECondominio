@@ -38,7 +38,7 @@ namespace BuscaECondominio.Web.Controllers
         [HttpPost("AdicionarUsuario")]
         public async Task<IActionResult> AdicionarUsuario(UsuarioDTO usuarioDTO)
         {
-            var usuario = new Usuario(usuarioDTO.Id, usuarioDTO.Email, usuarioDTO.Cpf, usuarioDTO.DataNascimento, usuarioDTO.Nome, usuarioDTO.Senha, usuarioDTO.DataCriacao);
+            var usuario = new Usuario(usuarioDTO.Id, usuarioDTO.Email, usuarioDTO.Cpf, usuarioDTO.DataNascimento, usuarioDTO.Nome, usuarioDTO.Senha, usuarioDTO.UrlImagemCadastro, usuarioDTO.DataCriacao);
             await _repositorio.AdicionarUsuario(usuario);
             return Ok("Usuario adicionado.");
         }
@@ -50,7 +50,8 @@ namespace BuscaECondominio.Web.Controllers
             var imagemValida = await ValidarImagem(nomeArquivo);
             if (imagemValida)
             {
-                return Ok();
+                await _repositorio.AlterarUrlImagemCadastro(id, nomeArquivo);
+                return Ok(nomeArquivo);
             }
             else
             {
@@ -104,7 +105,7 @@ namespace BuscaECondominio.Web.Controllers
         {
             await _repositorio.AlterarEmail(id, alterarEmail);
 
-            return Ok("Email alterado.");            
+            return Ok("Email alterado.");
         }
         [HttpPut("AlterarSenha")]
         public async Task<IActionResult> AlterarSenha(int id, string alterarSenha)
@@ -119,6 +120,25 @@ namespace BuscaECondominio.Web.Controllers
             return Ok("Nome alterado.");
         }
 
+        [HttpPut("LoginEmail/Senha")]
+        public async Task<IActionResult> LoginPorEmailESenha(string email, string senha)
+        {
+            var emailUsuario = await _repositorio.LoginBuscarPorEmail(email);
+            var validarSenhaUsuario = await ConferirSenhaDoUsuario(emailUsuario, senha);
+            if (validarSenhaUsuario)
+            {
+                return Ok(emailUsuario.Id);
+            }
+            return BadRequest("A senha do usuário está incorreta.");
+        }
+        private async Task<bool> ConferirSenhaDoUsuario(Usuario idUsuario, string senha)
+        {
+            if (idUsuario.Senha == senha)
+            {
+                return true;
+            }
+            return false;
+        }        
         [HttpDelete("DeletarUsuario")]
         public async Task<IActionResult> DeletarUsuario(int id)
         {
@@ -127,3 +147,7 @@ namespace BuscaECondominio.Web.Controllers
         }
     }
 }
+
+
+
+

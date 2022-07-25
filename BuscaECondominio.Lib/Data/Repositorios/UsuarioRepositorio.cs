@@ -24,6 +24,16 @@ namespace BuscaECondominio.Lib.Data.Repositorios
         public async Task AlterarNome(int id, string alterarNome)
         {
             _dbset.Find(id).SetNome(alterarNome);
+            await _context.SaveChangesAsync();
         }
+        public async Task AlterarUrlImagemCadastro(int id, string alterarurlImagemCadastro)
+        {
+            _dbset.Find(id).SetUrlImagemCadastro(alterarurlImagemCadastro);
+            await _context.SaveChangesAsync();
+        }   
+        public async Task<Usuario> LoginBuscarPorEmail(string emailDoUsuario)
+        {
+            return await _dbset.AsNoTracking().FirstAsync(x => x.Email == emailDoUsuario);
+        }     
     }
 }
