@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BuscaECondominio.Lib\BuscaECondominio.Lib.csproj" />
+    <ProjectReference Include="..\BuscaECondominio.Application\BuscaECondominio.Application.csproj" />
   </ItemGroup>
 
 </Project>

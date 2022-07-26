@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuscaECondominio.Test", "Bu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuscaECondominio.Web", "BuscaECondominio.Web\BuscaECondominio.Web.csproj", "{9363A579-39C8-4762-8EF2-FABD54892570}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuscaECondominio.Application", "BuscaECondominio.Application\BuscaECondominio.Application.csproj", "{4E2C9501-98AE-4921-8BB6-0EF2DAC77896}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{9363A579-39C8-4762-8EF2-FABD54892570}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9363A579-39C8-4762-8EF2-FABD54892570}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9363A579-39C8-4762-8EF2-FABD54892570}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E2C9501-98AE-4921-8BB6-0EF2DAC77896}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E2C9501-98AE-4921-8BB6-0EF2DAC77896}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E2C9501-98AE-4921-8BB6-0EF2DAC77896}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E2C9501-98AE-4921-8BB6-0EF2DAC77896}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
