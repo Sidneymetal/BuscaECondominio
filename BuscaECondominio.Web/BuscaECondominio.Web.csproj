@@ -19,8 +19,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BuscaECondominio.Lib\BuscaECondominio.Lib.csproj" />
+  <ItemGroup>  
     <ProjectReference Include="..\BuscaECondominio.Application\BuscaECondominio.Application.csproj" />
   </ItemGroup>
 
