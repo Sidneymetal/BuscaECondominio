@@ -19,19 +19,20 @@ namespace BuscaECondominio.Web.Controllers
         {
             _application = application;
         }
+
         [HttpGet("ListarUsuario")]
-        // public async Task<IActionResult> ListarUsuarios()
-        // {
-        //     try
-        //     {
-        //         return Ok(await _application.ListarUsuarios());
-        //     }
-        //     catch (System.Exception)
-        //     {
+        public async Task<IActionResult> ListarUsuarios()
+        {
+            try
+            {
+                return await _application.ListarUsuario();
+            }
+            catch (System.Exception)
+            {
                 
-        //         throw new Exception();
-        //     }
-        // }
+                throw new Exception();
+            }
+        }
         
         [HttpPost("AdicionarUsuario")]
         public async Task<int> AdicionarUsuario(UsuarioDTO usuarioDTO)
@@ -89,19 +90,19 @@ namespace BuscaECondominio.Web.Controllers
             }
         }
 
-        // [HttpGet("ConferirSenhaDoUsuario")]
-        // public async Task<bool> ConferirSenhaDoUsuario(Usuario idUsuario, string senha)
-        // {
-        //     try
-        //     {
-        //         return await _application.ConferirSenhaDoUsuario(idUsuario, senha);
-        //     }
-        //     catch (System.Exception)
-        //     {
+        [HttpGet("ConferirSenhaDoUsuario")]
+        public async Task<bool> ConferirSenhaDoUsuario(Usuario idUsuario, string senha)
+        {
+            try
+            {
+                return await _application.ConferirSenhaDoUsuario(idUsuario, senha);
+            }
+            catch (System.Exception)
+            {
                 
-        //         throw new Exception("Senha inválida.")
-        //     }
-        // }
+                throw new Exception("Senha inválida.");
+            }
+        }
 
         [HttpGet("BuscarUsuarioPorImagem")]
         public async Task<bool> BuscarUsuarioPorImagem(string urlImagemCadastro, IFormFile image)

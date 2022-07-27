@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.2" />
-    <PackageReference Include="awssdk.rekognition" Version="3.7.8.33" />
-    <PackageReference Include="awssdk.s3" Version="3.7.9.26" />
+    <PackageReference Include="awssdk.rekognition" Version="3.7.9" />
+    <PackageReference Include="awssdk.s3" Version="3.7.9.31" />
     <PackageReference Include="EFCore.NamingConventions" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
@@ -20,7 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>  
-    <ProjectReference Include="..\BuscaECondominio.Application\BuscaECondominio.Application.csproj" />
+    <ProjectReference Include="..\BuscaECondominio.Application\BuscaECondominio.Application.csproj" /> 
   </ItemGroup>
 
 </Project>
+
+

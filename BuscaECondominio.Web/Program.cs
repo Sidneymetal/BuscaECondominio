@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Amazon.Runtime;
 using Amazon.S3;
 using Amazon.Rekognition;
+using BuscaECondominio.Web.Middleware;
+using BuscaECondominio.Application;
+using BuscaECondominio.Application.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,8 +15,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BuscaECondominioContext>(conn => conn.UseNpgsql(builder.Configuration.GetConnectionString("BuscaECondominio")).UseSnakeCaseNamingConvention());
 
 builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
-builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>(); 
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -36,6 +37,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<Middleware>();
 
 app.UseHttpsRedirection();
 
