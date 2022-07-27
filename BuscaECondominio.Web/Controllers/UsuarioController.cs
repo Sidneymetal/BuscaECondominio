@@ -7,6 +7,7 @@ using Amazon.Rekognition.Model;
 using Amazon.S3;
 using Amazon.S3.Model;
 using BuscaECondominio.Application;
+using BuscaECondominio.Lib.Models;
 
 namespace BuscaECondominio.Web.Controllers
 {
@@ -21,7 +22,7 @@ namespace BuscaECondominio.Web.Controllers
         }
 
         [HttpGet("ListarUsuario")]
-        public async Task<IActionResult> ListarUsuarios()
+        public async Task<List<Usuario>> ListarUsuarios()
         {
             try
             {

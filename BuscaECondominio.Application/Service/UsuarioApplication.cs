@@ -27,7 +27,7 @@ namespace BuscaECondominio.Application.Service
             _rekognitionClient = rekognitionClient;
         }
         
-        public async Task<List<Usuario>> ListarUsuarios()
+        public async Task<List<Usuario>> ListarUsuario()
         {
             return await _repositorio.ListarTodos();
         }
