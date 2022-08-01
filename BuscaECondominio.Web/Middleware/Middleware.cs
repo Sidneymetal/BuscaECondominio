@@ -18,7 +18,7 @@ namespace BuscaECondominio.Web.Middleware
             catch (System.Exception ex)
             {
                 context.Response.StatusCode = 400;
-                await context.Response.WriteAsJsonAsync(new {msg = ex.Message} );
+                await context.Response.WriteAsJsonAsync(new {msg = ex.Message});
             }
         }
     }

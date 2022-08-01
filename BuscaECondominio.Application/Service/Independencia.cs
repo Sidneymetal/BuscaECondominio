@@ -1,4 +1,6 @@
+using Amazon.Rekognition;
 using Amazon.Runtime;
+using Amazon.S3;
 using BuscaECondominio.Lib.Data;
 using BuscaECondominio.Lib.Data.Repositorios;
 using BuscaECondominio.Lib.Interfaces;
@@ -9,13 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BuscaECondominio.Application.Service
 {
-    public static class Independencia
+    public class Independencia
     {
-        private static string[] args;
-
-        public static void InjecaoDeIndependencia(this IServiceCollection collection, IConfiguration configuration)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+        public void InjetarDependenciaProgram(WebApplicationBuilder builder)
+        {            
 
             builder.Services.AddDbContext<BuscaECondominioContext>(conn => conn.UseNpgsql(builder.Configuration.GetConnectionString("BuscaECondominio")).UseSnakeCaseNamingConvention());
 
@@ -23,13 +22,15 @@ namespace BuscaECondominio.Application.Service
 
             builder.Services.AddScoped<IUsuarioApplication, UsuarioApplication>();
 
-            builder.Services.AddEndpointsApiExplorer();
-
-            var app = builder.Build();
-
+           
             var awsOptions = builder.Configuration.GetAWSOptions();
             awsOptions.Credentials = new EnvironmentVariablesAWSCredentials();
             builder.Services.AddDefaultAWSOptions(awsOptions);
+
+            builder.Services.AddAWSService<IAmazonS3>();   
+
+            builder.Services.AddScoped<AmazonRekognitionClient>();           
         }
     }
 }
+
