@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using Amazon.Rekognition;
 using Amazon.Rekognition.Model;
 using Amazon.S3;
 using Amazon.S3.Model;
-using BuscaECondominio.Application;
 using BuscaECondominio.Lib.Interfaces;
 using BuscaECondominio.Lib.Models;
 using BuscaECondominio.Web.DTOs;
@@ -36,22 +34,22 @@ namespace BuscaECondominio.Application.Service
         {
             var usuario = new Usuario(usuarioDTO.Id, usuarioDTO.Email, usuarioDTO.Cpf, usuarioDTO.DataNascimento, usuarioDTO.Nome, usuarioDTO.Senha, usuarioDTO.UrlImagemCadastro, usuarioDTO.DataCriacao);
             await _repositorio.AdicionarUsuario(usuario);
-            throw new Exception("Usuario adicionado.");
+            return usuario.Id;
         }
         
-        public async Task<bool> CadastrarImagem(int id, IFormFile imagem)
+        public async Task CadastrarImagem(int id, IFormFile imagem)
         {
             var nomeArquivo = await SalvarNoS3(imagem);
             var imagemValida = await ValidarImagem(nomeArquivo);
             if (imagemValida)
             {
                 await _repositorio.AlterarUrlImagemCadastro(id, nomeArquivo);
-                return true;
+                
             }
             else
             {
                 await _amazonS3.DeleteObjectAsync("imagens-aula", nomeArquivo);
-                return false;
+                throw new Exception("A imagem não é válida.");
             }
         }
         private async Task<string> SalvarNoS3(IFormFile image)
@@ -71,7 +69,7 @@ namespace BuscaECondominio.Application.Service
                 return request.Key;
             }
         }
-        private async Task<bool> ValidarImagem(string nomeArquivo)
+        public async Task<bool> ValidarImagem(string nomeArquivo)
         {
             var entrada = new DetectFacesRequest();
             var imagem = new Image();
@@ -94,10 +92,9 @@ namespace BuscaECondominio.Application.Service
             }
             return false;
         }        
-        public async Task<bool> AlterarSenha(int id, string alterarSenha)
+        public async Task AlterarSenha(int id, string alterarSenha)
         {
-            await _repositorio.AlterarSenha(id, alterarSenha);
-            throw new Exception("Senha alterado.");
+            await _repositorio.AlterarSenha(id, alterarSenha);            
         }        
         public async Task<bool> LoginPorEmailESenha(string email, string senha)
         {
@@ -109,7 +106,7 @@ namespace BuscaECondominio.Application.Service
             }
             throw new Exception("A senha do usuário está incorreta.");
         }
-        private async Task<bool> ConferirSenhaDoUsuario(Usuario idUsuario, string senha)
+        public async Task<bool> ConferirSenhaDoUsuario(Usuario idUsuario, string senha)
         {
             if (idUsuario.Senha == senha)
             {
@@ -127,7 +124,7 @@ namespace BuscaECondominio.Application.Service
             }
             throw new Exception ("A imagem do usuário não corresponde com o cadastro.");
         }
-        private async Task<bool> BuscarUsuarioPorImagem(string urlImagemCadastro, IFormFile image)
+        public async Task<bool> BuscarUsuarioPorImagem(string urlImagemCadastro, IFormFile image)
         {
             using (var memoriaStream = new MemoryStream()) // Buscar imagem no banco de dados
             {
@@ -159,25 +156,10 @@ namespace BuscaECondominio.Application.Service
                 return false;
             }
         }        
-        public async Task<bool> DeletarUsuario(int id)
+        public async Task DeletarUsuario(int id)
         {
-            await _repositorio.DeletarUsuario(id);
-            throw new Exception("Usuario removido.");
-        }
-        Task<bool> IUsuarioApplication.ValidarImagem(string nomeArquivo)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<bool> IUsuarioApplication.ConferirSenhaDoUsuario(Usuario idUsuario, string senha)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<bool> IUsuarioApplication.BuscarUsuarioPorImagem(string urlImagemCadastro, IFormFile image)
-        {
-            throw new NotImplementedException();
-        }
+            await _repositorio.DeletarUsuario(id);            
+        }       
     }
 }
 
