@@ -7,7 +7,7 @@ namespace BuscaECondominio.Application
     public interface IUsuarioApplication 
     {    
          Task<List<Usuario>> ListarUsuario();     
-         Task <int>AdicionarUsuario(UsuarioDTO usuarioDTO);
+         Task <Guid>AdicionarUsuario(UsuarioDTO usuarioDTO);
          Task CadastrarImagem(int id, IFormFile imagem);        
          Task AlterarSenha(int id, string alterarSenha);
          Task<bool> LoginPorEmailESenha(string email, string senha);

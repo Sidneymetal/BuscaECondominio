@@ -1,5 +1,5 @@
 CREATE TABLE usuarios (
-  id INTEGER PRIMARY KEY,
+  uuid INTEGER PRIMARY KEY,
   email VARCHAR(256),
   cpf VARCHAR(256),
   data_nascimento TIMESTAMP,

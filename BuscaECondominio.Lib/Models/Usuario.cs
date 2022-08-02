@@ -11,9 +11,8 @@ namespace BuscaECondominio.Lib.Models
         public string? UrlImagemCadastro { get; private set; }
         public DateTime DataCriacao { get; private set; }       
 
-        public Usuario(int id, string email, string cpf, DateTime dataNascimento, string nome, string senha, string urlImagemCadastro, DateTime dataCriacao) : base(id)
-        {
-            SetId(id);
+        public Usuario(string email, string cpf, DateTime dataNascimento, string nome, string senha, string urlImagemCadastro, DateTime dataCriacao) : base(Guid.NewGuid())
+        {            
             SetEmail(email);
             SetCpf(cpf);
             SetDataNascimento(dataNascimento);
@@ -58,25 +57,25 @@ namespace BuscaECondominio.Lib.Models
         {
             if (dataNascimento < DateTime.Parse("01/01/2010"))
                 return true;
-            throw new Exception();
+            throw new Exception("O ano de nascimento não pode ser maior que 2010.");
         }
         public bool ValidarEmail(string email)
         {
             if (email.Contains("@"))
                 return true;
-            throw new Exception();
+            throw new Exception("O E-mail deve conter @.");
         }
         public bool ValidarCpF(string cpf)
         {
             if ((cpf.Count() <= 11) & cpf.All(char.IsNumber))
                 return true;
-            throw new Exception();
+            throw new Exception("CPF deve conter 11 caracteres e apenas números.");
         }
         public bool ValidarSenha(string senha)
         {
             if (senha.Count() > 8)
                 return true;
-            throw new Exception();
+            throw new Exception("A senha deve ter acima de 8 caracteres.");
         }
     }
 }

@@ -25,9 +25,9 @@ namespace BuscaECondominio.Application.Service
             return await _repositorio.ListarTodos();
         }
         
-        public async Task<int> AdicionarUsuario(UsuarioDTO usuarioDTO)
+        public async Task<Guid> AdicionarUsuario(UsuarioDTO usuarioDTO)
         {
-            var usuario = new Usuario(usuarioDTO.Id, usuarioDTO.Email, usuarioDTO.Cpf, usuarioDTO.DataNascimento, usuarioDTO.Nome, usuarioDTO.Senha, usuarioDTO.UrlImagemCadastro, usuarioDTO.DataCriacao);
+            var usuario = new Usuario(usuarioDTO.Email, usuarioDTO.Cpf, usuarioDTO.DataNascimento, usuarioDTO.Nome, usuarioDTO.Senha, usuarioDTO.UrlImagemCadastro, usuarioDTO.DataCriacao);
             await _repositorio.AdicionarUsuario(usuario);
             return usuario.Id;
         }        
@@ -69,7 +69,7 @@ namespace BuscaECondominio.Application.Service
             }
             return false;
         }        
-        public async Task<bool> LoginImagem(int id, IFormFile image)
+        public async Task<bool> LoginImagem(Guid id, IFormFile image)
         {
             var buscarUsuarioId = await _repositorio.ListarUsuarioPorId(id);//Buscar usuário no bando por Id.
             var buscarUsuarioImagem = await _amazonService.BuscarUsuarioPorImagem(buscarUsuarioId.UrlImagemCadastro, image);

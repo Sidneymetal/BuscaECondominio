@@ -19,7 +19,7 @@ namespace BuscaECondominio.Lib.Data.Repositorios
         {
             return await _dbset.AsNoTracking().ToListAsync();           
         }             
-        public async Task <T> ListarUsuarioPorId(int id)
+        public async Task <T> ListarUsuarioPorId(Guid id)
         {
             return await _dbset.AsNoTracking().FirstAsync(x => x.Id == id);
         }

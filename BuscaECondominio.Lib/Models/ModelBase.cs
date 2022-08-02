@@ -2,12 +2,12 @@ namespace BuscaECondominio.Lib.Models
 {
     public class ModelBase
     {
-        public int Id { get; private set; }
-        public ModelBase(int id)
+        public Guid Id { get; private set; }
+        public ModelBase(Guid id)
         {
             SetId(id);
         }
-        public void SetId(int id)
+        public void SetId(Guid id)
         {
             Id = id;
         }
