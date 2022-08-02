@@ -20,12 +20,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-
-builder.Services.AddAWSService<IAmazonS3>();
-
-builder.Services.AddScoped<AmazonRekognitionClient>();
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuscaECondominio.Web", "Bus
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuscaECondominio.Application", "BuscaECondominio.Application\BuscaECondominio.Application.csproj", "{4E2C9501-98AE-4921-8BB6-0EF2DAC77896}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuscaECondominio.Service", "BuscaECondominio.Service\BuscaECondominio.Service.csproj", "{5916A8C0-630E-415F-A66E-34BA6CEB508C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuscaECondominio.DI", "BuscaECondominio.DI\BuscaECondominio.DI.csproj", "{D547F4E2-D237-466F-8D69-283C0DE469FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{4E2C9501-98AE-4921-8BB6-0EF2DAC77896}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E2C9501-98AE-4921-8BB6-0EF2DAC77896}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E2C9501-98AE-4921-8BB6-0EF2DAC77896}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5916A8C0-630E-415F-A66E-34BA6CEB508C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5916A8C0-630E-415F-A66E-34BA6CEB508C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5916A8C0-630E-415F-A66E-34BA6CEB508C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5916A8C0-630E-415F-A66E-34BA6CEB508C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D547F4E2-D237-466F-8D69-283C0DE469FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D547F4E2-D237-466F-8D69-283C0DE469FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D547F4E2-D237-466F-8D69-283C0DE469FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D547F4E2-D237-466F-8D69-283C0DE469FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

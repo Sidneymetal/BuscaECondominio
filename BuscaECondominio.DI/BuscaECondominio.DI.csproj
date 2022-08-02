@@ -12,15 +12,16 @@
     <PackageReference Include="awssdk.s3" Version="3.7.9.34" />
     <PackageReference Include="EFCore.NamingConventions" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.7" />    
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.5" />   
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.7" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.5" />
   </ItemGroup>
 
-  <ItemGroup>    
-    <ProjectReference Include="..\BuscaECondominio.Lib\BuscaECondominio.Lib.csproj" />    
-    <ProjectReference Include="..\BuscaECondominio.Service\BuscaECondominio.Service.csproj" />       
+  <ItemGroup>
+    <ProjectReference Include="..\BuscaECondominio.Application\BuscaECondominio.Application.csproj" />
+    <ProjectReference Include="..\BuscaECondominio.Lib\BuscaECondominio.Lib.csproj" />
+    <ProjectReference Include="..\BuscaECondominio.Service\BuscaECondominio.Service.csproj" />    
   </ItemGroup>
 
 </Project>
 
-
+ 

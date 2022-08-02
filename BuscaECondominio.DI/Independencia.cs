@@ -4,6 +4,7 @@ using Amazon.S3;
 using BuscaECondominio.Lib.Data;
 using BuscaECondominio.Lib.Data.Repositorios;
 using BuscaECondominio.Lib.Interfaces;
+using BuscaECondominio.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +23,8 @@ namespace BuscaECondominio.Application.Service
 
             builder.Services.AddScoped<IUsuarioApplication, UsuarioApplication>();
 
+            builder.Services.AddScoped<AmazonService>();
+
            
             var awsOptions = builder.Configuration.GetAWSOptions();
             awsOptions.Credentials = new EnvironmentVariablesAWSCredentials();
@@ -29,7 +32,9 @@ namespace BuscaECondominio.Application.Service
 
             builder.Services.AddAWSService<IAmazonS3>();   
 
-            builder.Services.AddScoped<AmazonRekognitionClient>();           
+            builder.Services.AddScoped<AmazonRekognitionClient>();      
+
+                 
         }
     }
 }
