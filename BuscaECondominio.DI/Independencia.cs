@@ -23,7 +23,7 @@ namespace BuscaECondominio.Application.Service
 
             builder.Services.AddScoped<IUsuarioApplication, UsuarioApplication>();
 
-            builder.Services.AddScoped<AmazonService>();
+            builder.Services.AddScoped<IServiceAWS, ServiceAWS>();
 
            
             var awsOptions = builder.Configuration.GetAWSOptions();

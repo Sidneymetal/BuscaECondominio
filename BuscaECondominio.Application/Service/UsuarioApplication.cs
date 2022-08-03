@@ -9,12 +9,12 @@ namespace BuscaECondominio.Application.Service
     public class UsuarioApplication : IUsuarioApplication
     {       
         private readonly IUsuarioRepositorio _repositorio;        
-        private readonly AmazonService _amazonService;
+        private readonly IServiceAWS _amazonService;
         public static List<Usuario> ListaUsuarios { get; set; } = new List<Usuario>();
         public readonly List<string> _imageFormats = new List<string>() { "image/jpeg", "image/png" };
 
 
-        public UsuarioApplication(IUsuarioRepositorio repositorio, AmazonService amazonService)
+        public UsuarioApplication(IUsuarioRepositorio repositorio, IServiceAWS amazonService)
         {            
             _repositorio = repositorio;
             _amazonService = amazonService;          

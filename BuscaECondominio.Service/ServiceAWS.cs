@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace BuscaECondominio.Service
 {
-    public class AmazonService
+    public class ServiceAWS : IServiceAWS
     {        
         private readonly AmazonRekognitionClient _rekognitionClient;
         private readonly IAmazonS3 _amazonS3;        
         public readonly List<string> _imageFormats = new List<string>() { "image/jpeg", "image/png" };
-        public AmazonService(IAmazonS3 amazonS3, AmazonRekognitionClient rekognitionClient)
+        public ServiceAWS(IAmazonS3 amazonS3, AmazonRekognitionClient rekognitionClient)
         {         
             _amazonS3 = amazonS3;
             _rekognitionClient = rekognitionClient;
