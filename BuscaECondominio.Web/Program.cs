@@ -1,5 +1,3 @@
-using Amazon.Rekognition;
-using Amazon.S3;
 using BuscaECondominio.Application.Service;
 using BuscaECondominio.Web.Middleware;
 
@@ -39,6 +37,8 @@ app.UseMiddleware<Middleware>();
 app.UseCors("corspratica");
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

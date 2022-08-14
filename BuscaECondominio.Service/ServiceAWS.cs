@@ -56,9 +56,9 @@ namespace BuscaECondominio.Service
             }
             return false;
         }       
-        public async Task<bool> BuscarUsuarioPorImagem(string urlImagemCadastro, IFormFile image)
+        public async Task<bool> VerificarImagem(string urlImagemCadastro, IFormFile image)
         {
-            using (var memoriaStream = new MemoryStream()) // Buscar imagem no banco de dados
+            using (var memoriaStream = new MemoryStream()) 
             {
                 var request = new CompareFacesRequest();
 

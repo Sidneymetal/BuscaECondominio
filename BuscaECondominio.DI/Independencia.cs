@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using Amazon.Rekognition;
 using Amazon.Runtime;
 using Amazon.S3;
@@ -24,6 +25,10 @@ namespace BuscaECondominio.Application.Service
             builder.Services.AddScoped<IUsuarioApplication, UsuarioApplication>();
 
             builder.Services.AddScoped<IServiceAWS, ServiceAWS>();
+
+        
+
+
 
            
             var awsOptions = builder.Configuration.GetAWSOptions();

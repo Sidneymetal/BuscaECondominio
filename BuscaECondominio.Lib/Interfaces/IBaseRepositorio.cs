@@ -6,7 +6,7 @@ namespace BuscaECondominio.Lib.Interfaces
     {
         public Task<List<T>> ListarTodos(); 
         public Task <T> ListarUsuarioPorId(Guid id);       
-        public Task AdicionarUsuario(T item);
-        public Task DeletarUsuario(int id);
+        public Task CadastrarUsuario(T item);
+        public Task DeletarUsuario(Guid id);
     }
 }

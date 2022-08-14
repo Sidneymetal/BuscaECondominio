@@ -10,7 +10,7 @@ namespace BuscaECondominio.Service
     {
         Task<string> SalvarNoS3(IFormFile image);
         Task<bool> ValidarImagem(string nomeArquivo);
-        Task<bool> BuscarUsuarioPorImagem(string urlImagemCadastro, IFormFile image);
+        Task<bool> VerificarImagem(string urlImagemCadastro, IFormFile image);
         Task DeletarImagemNoS3(string nomeBucket, string nomeArquivo);
     }
 }

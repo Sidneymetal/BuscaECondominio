@@ -23,12 +23,12 @@ namespace BuscaECondominio.Lib.Data.Repositorios
         {
             return await _dbset.AsNoTracking().FirstAsync(x => x.Id == id);
         }
-        public async Task AdicionarUsuario(T item)
+        public async Task CadastrarUsuario(T item)
         {
             await _dbset.AddAsync(item);
             await _context.SaveChangesAsync();
         }
-        public async Task DeletarUsuario(int id)
+        public async Task DeletarUsuario(Guid id)
         {
             var usuario = await _dbset.FindAsync(id);
             _dbset.Remove(usuario);

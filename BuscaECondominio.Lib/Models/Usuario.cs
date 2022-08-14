@@ -1,4 +1,7 @@
 
+using System.Text;
+using Konscious.Security.Cryptography;
+
 namespace BuscaECondominio.Lib.Models
 {
     public class Usuario : ModelBase
@@ -9,7 +12,12 @@ namespace BuscaECondominio.Lib.Models
         public string Nome { get; private set; }
         public string Senha { get; private set; }
         public string? UrlImagemCadastro { get; private set; }
-        public DateTime DataCriacao { get; private set; }       
+        public DateTime DataCriacao { get; private set; }  
+
+        public Usuario()
+        {
+            
+        }     
 
         public Usuario(string email, string cpf, DateTime dataNascimento, string nome, string senha, string urlImagemCadastro, DateTime dataCriacao) : base(Guid.NewGuid())
         {            
@@ -41,9 +49,10 @@ namespace BuscaECondominio.Lib.Models
             Email = email;
         }
         public void SetSenha(string senha)
-        {
+        {   
             ValidarSenha(senha);
-            Senha = senha;
+            var senhaHash = GerarHash(senha);            
+            Senha = senhaHash;
         }
         public void SetUrlImagemCadastro(string urlImagem)
         {
@@ -76,6 +85,25 @@ namespace BuscaECondominio.Lib.Models
             if (senha.Count() > 8)
                 return true;
             throw new Exception("A senha deve ter acima de 8 caracteres.");
-        }
+        }      
+        public string GerarHash(string senha)
+        {                     
+            var argon2 = new Argon2i(Encoding.UTF8.GetBytes(senha));
+            argon2.DegreeOfParallelism = 1;
+            argon2.Iterations = 2;
+            argon2.MemorySize = 64;
+                        
+            var hash = argon2.GetBytes(64);
+            return Convert.ToBase64String(hash);
+        }  
+        public bool ConferirSenhaDoUsuario(string senha)
+        {    
+            var senhaHash = GerarHash(senha);        
+            if (Senha == senhaHash)
+            {
+                return true;
+            }
+            return false;
+        }          
     }
 }
